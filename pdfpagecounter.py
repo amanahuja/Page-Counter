@@ -7,24 +7,29 @@ print """
 --- PDF Page Counter ---
 PDF Page Counter
 
-Version 3
-This version:
-    Uses recursive directory walk so that folder depth. 
-    Catch exceptions for corrupt files
-    General cleanup 
+ - Navigates a directory in the file system
+ - Locates and counts PDF files
+ - Counts pages and tallies page size within PDFs
 
     PDF Specification
     http://www.adobe.com/content/dam/Adobe/en/devnet/pdf/pdfs/PDF32000_2008.pdf
 
-Created                   Sep 07 16:11:23 2011
-1st version published     Oct 05 16:08:23 2011 
+Version 3
+This version:
+    Uses recursive directory walk 
+    Catches corrupt files
+    General cleanup & comments
+
+Version 3 Created         Sep 07 16:11:23 2011
+Published                   Oct 05 16:08:23 2011 
 @ Author: Aman Ahuja (amanahuja@gmail.com)
 ----------
 """
 
 
+largeformatsize = 95
 ''' 
-# Define large format here     
+# Define large format
     Dimensions expressed in Points (72 points = 1 inch)
     http://en.wikipedia.org/wiki/Point_(typography)
     http://en.wikipedia.org/wiki/Paper_size
@@ -32,7 +37,6 @@ Created                   Sep 07 16:11:23 2011
 #   8.5 x 11 is about 93.46
 #   Use ~95 to define just over "Letter" size 
 '''
-largeformatsize = 95
 
 import warnings
 warnings.simplefilter("ignore", DeprecationWarning)
