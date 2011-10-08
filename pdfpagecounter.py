@@ -56,6 +56,46 @@ total_count = {
 
 #Keep track of the PDFs that PyPDF could not open
 badpdfs = []
+
+def main():
+    #prompt user for rootdir 
+    print "Enter the complete path of the directory to parse."
+    print "Example: C:\path\\to\\project "
+    rootdir = raw_input(">>")
+    
+    try: 
+        os.listdir(rootdir)
+        print '\nOkay!'
+    except:
+        sys.exit("Invalid directory path or could not access.")
+        
+    print '\nRoot Directory for Page Count:', rootdir
+    
+    """
+    Initiates the program by beginning the parse with rootdir
+    """
+    dir_count = ParseDir(rootdir)
+    
+    for key, value in dir_count.items(): 
+        total_count[key] += value
+    
+    #Print out the final totals for all directories and sub-directories
+    print '\n\n---Summary stats ---'
+    print 'Directory:', rootdir
+    print 'Total number of files:', total_count["nfiles"]
+    print 'Total number of PDF files:', total_count["npdfs"]
+    print 'Total number of pages in PDFs are:', total_count["npages"]
+    print '\tSmall pages:', total_count["nsmallpages"]
+    print '\tLarge pages:', total_count["nlargepages"]
+    
+    #Print out any PDFs that could not be opened by pyPDF
+    if len(badpdfs) > 0: 
+        print '\nWARNING!'
+        print 'The following PDFs seem to be corrupt. They were not included in the page count.'
+        for badpdf in badpdfs: 
+            print '\t', badpdf
+    print '\n--- END ---'
+    
                  
 def sorted_listdir(path):
     """
@@ -166,43 +206,10 @@ def ParseDir (thisdir):
 
     return dir_count
 
-#prompt user for rootdir instead
-print "Enter the complete path of the directory to parse."
-print "Example: C:\path\\to\\project "
-rootdir = raw_input(">>")
-
-try: 
-    os.listdir(rootdir)
-    print '\nOkay!'
-except:
-    sys.exit("Invalid directory path or could not access.")
+if __name__ == "__main__":
+    main()
     
-print '\nRoot Directory for Page Count:', rootdir
+    #To prevent console from disappearing for Windows executable users
+    raw_input ("Press ENTER to Exit.")
 
-"""
-Initiates the program by beginning the parse with rootdir
-"""
-dir_count = ParseDir(rootdir)
 
-for key, value in dir_count.items(): 
-    total_count[key] += value
-
-#Print out the final totals for all directories and sub-directories
-print '\n\n---Summary stats ---'
-print 'Directory:', rootdir
-print 'Total number of files:', total_count["nfiles"]
-print 'Total number of PDF files:', total_count["npdfs"]
-print 'Total number of pages in PDFs are:', total_count["npages"]
-print '\tSmall pages:', total_count["nsmallpages"]
-print '\tLarge pages:', total_count["nlargepages"]
-
-#Print out any PDFs that could not be opened by pyPDF
-if len(badpdfs) > 0: 
-    print '\nWARNING!'
-    print 'The following PDFs seem to be corrupt. They were not included in the page count.'
-    for badpdf in badpdfs: 
-        print '\t', badpdf
-print '\n--- END ---'
-
-#To prevent console from disappearing for Windows executable users
-raw_input ("Press ENTER to Exit.")
