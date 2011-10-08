@@ -43,6 +43,7 @@ warnings.simplefilter("ignore", DeprecationWarning)
 
 from pyPdf import PdfFileReader
 import os, sys
+from math import ceil
 
 #Various global counts needed
 total_count = { 
@@ -51,7 +52,8 @@ total_count = {
                 "npdfs":0, 
                 "npages":0,
                 "nlargepages":0,
-                "nsmallpages":0
+                "nsmallpages":0,
+                "nsizeD":0,
                }
 
 #Keep track of the PDFs that PyPDF could not open
@@ -87,6 +89,7 @@ def main():
     print 'Total number of pages in PDFs are:', total_count["npages"]
     print '\tSmall pages:', total_count["nsmallpages"]
     print '\tLarge pages:', total_count["nlargepages"]
+    print '\tSize D page-equivalent:', total_count["nsizeD"]
     
     #Print out any PDFs that could not be opened by pyPDF
     if len(badpdfs) > 0: 
@@ -116,7 +119,8 @@ def ProcessPDF ( filename ):
     pdf_count = { 
                 "npages":0,
                 "nlargepages":0,
-                "nsmallpages":0
+                "nsmallpages":0,
+                "nsizeD":0,
                }
 
     filestream = file(filename, "rb")
@@ -133,12 +137,20 @@ def ProcessPDF ( filename ):
     
         height = (pdfFile.getPage(ii).artBox.getUpperRight_y()/72 -
                   pdfFile.getPage(ii).artBox.getLowerLeft_y()/72)
-        
+               
         if (width * height) > largeformatsize:
             pdf_count["nlargepages"] += 1
         else:
             pdf_count["nsmallpages"] += 1
     
+        
+        longside = width if width > height else height
+        if longside > 34: 
+            pdf_count["nsizeD"] += int(ceil(longside / 22))
+        else: 
+            pdf_count["nsizeD"] += 1
+        
+            
     return pdf_count
    
 def ParseDir (thisdir):
@@ -155,7 +167,8 @@ def ParseDir (thisdir):
                 "npdfs":0, 
                 "npages":0,
                 "nlargepages":0,
-                "nsmallpages":0
+                "nsmallpages":0,
+                "nsizeD":0,
                }    
     print     #Spacing for readability
     
@@ -203,6 +216,7 @@ def ParseDir (thisdir):
     print '\tNumber of pages:', dir_count["npages"]
     print '\t\tLarge pages:', dir_count["nlargepages"]
     print '\t\tSmall pages:', dir_count["nsmallpages"]
+    print '\t\tSmall pages:', dir_count["nsizeD"]
 
     return dir_count
 
