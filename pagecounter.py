@@ -199,28 +199,28 @@ def ParseDir (thisdir):
 import cmd
 
 class Console(cmd.Cmd):
-  
-    #Override Cmd init
-    def __init__(self):
-      cmd.Cmd.__init__(self)
-      self.prompt = "==> "
-      self.intro = """
-        PDF Page Counter
-        Author: @amanqa
-        https://github.com/amanahuja/Page-Counter
-        ----------------------
-        Type 'help' for a list of commands.
-        Type 'help <command>' for help on any command
-        """
-        
-    ##
-    ## Overide cmd methods
-    ##
-    def postloop(self):
-      """On Exit
+
+  #Override Cmd init
+  def __init__(self):
+    cmd.Cmd.__init__(self)
+    self.prompt = "==> "
+    self.intro = """
+      PDF Page Counter
+      Author: @amanqa
+      https://github.com/amanahuja/Page-Counter
+      ----------------------
+      Type 'help' for a list of commands.
+      Type 'help <command>' for help on any command
       """
-      cmd.Cmd.postloop(self)
-      print '\nBye.\n'
+        
+  ##
+  ## Overide cmd methods
+  ##
+  def postloop(self):
+    """On Exit
+    """
+    cmd.Cmd.postloop(self)
+    print '\nBye.\n'
     
 
 if __name__ == "__main__":
