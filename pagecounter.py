@@ -230,6 +230,10 @@ class Console(cmd.Cmd):
     cmd.Cmd.preloop(self)
     self._hist = []  
   
+  def precmd(self, line):
+    self._hist += [ line.strip() ]
+    return line
+
   def postloop(self):
     """On Exit
     """
