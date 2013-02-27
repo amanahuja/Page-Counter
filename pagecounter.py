@@ -196,6 +196,11 @@ def ParseDir (thisdir):
 
     return dir_count
 
+import cmd
+
+class Console(cmd.Cmd):
+  pass
+
 if __name__ == "__main__":
     main()
     
