@@ -212,7 +212,11 @@ class Console(cmd.Cmd):
       Type 'help' for a list of commands.
       Type 'help <command>' for help on any command
       """
-        
+  
+  def do_exit(self, args):
+    """Exit from the console."""
+    return -1
+    
   ##
   ## Overide cmd methods
   ##
