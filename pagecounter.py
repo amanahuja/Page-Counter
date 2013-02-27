@@ -224,6 +224,12 @@ class Console(cmd.Cmd):
   ##
   ## Overide cmd methods
   ##
+  def preloop(self):
+    """Initialization
+    """
+    cmd.Cmd.preloop(self)
+    self._hist = []  
+  
   def postloop(self):
     """On Exit
     """
