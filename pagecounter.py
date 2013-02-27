@@ -216,8 +216,10 @@ class Console(cmd.Cmd):
   def do_hist(self, args):
     """Print recently used commands"""
     print 'Recently used commands: '
-    print self.hist[-11:-1] 
-    
+    history = ''
+    for h in self._hist[-11:-1] : 
+      history += h + ', '
+    print '{}'.format(history.rstrip(', '))
     
   def do_exit(self, args):
     """Exit from the console."""
