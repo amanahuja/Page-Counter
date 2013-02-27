@@ -213,6 +213,14 @@ class Console(cmd.Cmd):
       Type 'help <command>' for help on any command
       """
   
+  ##
+  ## Page-counter commands
+  ## 
+  
+  ##
+  ## Utility Commands
+  ## 
+  
   def do_hist(self, args):
     """Print recently used commands"""
     print 'Recently used commands: '
