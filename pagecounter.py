@@ -199,7 +199,19 @@ def ParseDir (thisdir):
 import cmd
 
 class Console(cmd.Cmd):
-  pass
+  
+    #Override Cmd init
+    def __init__(self):
+      cmd.Cmd.__init__(self)
+      self.prompt = "==> "
+      self.intro = """
+        PDF Page Counter
+        Author: @amanqa
+        https://github.com/amanahuja/Page-Counter
+        ----------------------
+        Type 'help' for a list of commands.
+        Type 'help <command>' for help on any command
+        """
 
 if __name__ == "__main__":
   console = Console()
