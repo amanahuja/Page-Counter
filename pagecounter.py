@@ -212,6 +212,16 @@ class Console(cmd.Cmd):
         Type 'help' for a list of commands.
         Type 'help <command>' for help on any command
         """
+        
+    ##
+    ## Overide cmd methods
+    ##
+    def postloop(self):
+      """On Exit
+      """
+      cmd.Cmd.postloop(self)
+      print '\nBye.\n'
+    
 
 if __name__ == "__main__":
   console = Console()
