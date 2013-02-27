@@ -202,9 +202,6 @@ class Console(cmd.Cmd):
   pass
 
 if __name__ == "__main__":
-    main()
-    
-    #To prevent console from disappearing for Windows executable users
-    raw_input ("Press ENTER to Exit.")
-
+  console = Console()
+  console . cmdloop() 
 
