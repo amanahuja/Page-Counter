@@ -216,7 +216,11 @@ class Console(cmd.Cmd):
   def do_exit(self, args):
     """Exit from the console."""
     return -1
-    
+  
+  def do_EOF(self, line):
+    """EOF or <Control-D> to Exit from Console"""
+    return True
+  
   ##
   ## Overide cmd methods
   ##
