@@ -15,11 +15,14 @@ http://www.adobe.com/content/dam/Adobe/en/devnet/pdf/pdfs/PDF32000_2008.pdf
 
 ## Release Notes
 
-Version 3
-This version:
-    Uses recursive directory walk 
-    Catches corrupt files
-    General cleanup & comments
+####Version 3
+Published: Oct 05 16:08:23 2011  
 
-Published     			  Oct 05 16:08:23 2011  
+This version:
+
+ * Uses recursive directory walk 
+ * Catches corrupt files
+ * General cleanup & comments
+
+
 ----------
