@@ -198,7 +198,7 @@ def ParseDir (thisdir):
 
 import cmd
 
-class Console(cmd.Cmd):
+class PageCounterConsole(cmd.Cmd):
 
   #Override Cmd init
   def __init__(self):
@@ -217,6 +217,14 @@ class Console(cmd.Cmd):
   ## Page-counter commands
   ## 
   
+  def do_filecount(self, args):
+    """Process a document, count pages
+    Syntax: 
+      filecount <filename>
+    """
+    print args, type(args)
+    
+    
   ##
   ## Utility Commands
   ## 
@@ -258,6 +266,6 @@ class Console(cmd.Cmd):
     
 
 if __name__ == "__main__":
-  console = Console()
+  console = PageCounterConsole()
   console . cmdloop() 
 
