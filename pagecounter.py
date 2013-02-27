@@ -213,6 +213,11 @@ class Console(cmd.Cmd):
       Type 'help <command>' for help on any command
       """
   
+  def do_hist(self, args):
+    """Print recently used commands"""
+    print 'Recently used commands: '
+    print self._hist
+    
   def do_exit(self, args):
     """Exit from the console."""
     return -1
