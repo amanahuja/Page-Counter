@@ -15,6 +15,14 @@ http://www.adobe.com/content/dam/Adobe/en/devnet/pdf/pdfs/PDF32000_2008.pdf
 
 ## Release Notes
 
+####Version 4 (Current)
+WIP: February 2013
+
+This version: 
+
+ * Adds a command line interactive interface
+ * Allows output to be piped to a log file
+ 
 ####Version 3
 Published: Oct 05 16:08:23 2011  
 
