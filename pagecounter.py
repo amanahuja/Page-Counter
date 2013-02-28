@@ -30,7 +30,17 @@ class PageCounterConsole(cmd.Cmd):
       return
     count = utils.ProcessPDF(args)
     print count
-    
+  
+  def do_dircount(self, args):
+    """Process a directory and all the files inside
+    Syntax: 
+      dircount <x:\path\to\dir\>
+    """
+    if not os.path.exists(args):
+      print 'Could not find specific path at <{}>'.format(args)
+      return
+    else: 
+      pass
   ##
   ## Utility Commands
   ## 
