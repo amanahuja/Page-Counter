@@ -68,7 +68,7 @@ class PageCounterConsole(cmd.Cmd):
     just over "Letter" size.
 
     """
-    self.largeformatsize = args
+    self.largeformatsize = float(args)
     print 'Set MIN_SIZE_FOR_LARGE_PAGES = {}'.format(self.largeformatsize)
     
   ##

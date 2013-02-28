@@ -111,7 +111,7 @@ def ProcessPDF ( filename, largeformatsize ):
     
         height = (pdfFile.getPage(ii).artBox.getUpperRight_y()/72 -
                   pdfFile.getPage(ii).artBox.getLowerLeft_y()/72)
-               
+        
         if (width * height) > largeformatsize:
             pdf_count["nlargepages"] += 1
         else:
