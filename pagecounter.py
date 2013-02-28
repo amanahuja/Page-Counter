@@ -1,5 +1,5 @@
 import utils
-import cmd
+import cmd, os
 
 class PageCounterConsole(cmd.Cmd):
 
@@ -25,7 +25,9 @@ class PageCounterConsole(cmd.Cmd):
     Syntax: 
       filecount <filename>
     """
-    print args, type(args)
+    if not os.path.exists(args):
+      print 'Could not find a file at <{}>'.format(args)
+      return
     count = utils.ProcessPDF(args)
     print count
     
