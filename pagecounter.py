@@ -3,6 +3,10 @@ import cmd, os
 
 class PageCounterConsole(cmd.Cmd):
 
+  #Define default largeformatsize
+  # See module do_setsize for more information
+  largeformatsize = 95
+  
   #Override Cmd init
   def __init__(self):
     cmd.Cmd.__init__(self)
@@ -28,7 +32,7 @@ class PageCounterConsole(cmd.Cmd):
     if not os.path.exists(args):
       print 'Could not find a file at <{}>'.format(args)
       return
-    count = utils.ProcessPDF(args)
+    count = utils.ProcessPDF(args, self.largeformatsize)
     print count
   
   def do_dircount(self, args):
@@ -40,8 +44,22 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find specific path at <{}>'.format(args)
       return
     
-    count = utils.ParseDir(args)
+    count = utils.ParseDir(args, self.largeformatsize)
     if not count: pass
+  
+  def do_setsize(self, args):
+    """Change the default size formats for counting.
+
+    Dimensions are expressed in Points (72 points = 1 inch)
+    See: 
+       http://en.wikipedia.org/wiki/Point_(typography)
+       http://en.wikipedia.org/wiki/Paper_size
+
+    For reference, 8.5 x 11 is about 93.46 points. So use ~95 to 
+    define large format as pages just over "Letter" size.
+    """
+    print args
+    
   ##
   ## Utility Commands
   ## 

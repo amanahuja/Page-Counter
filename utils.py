@@ -3,17 +3,6 @@ Author: Aman Ahuja
 https://github.com/amanahuja/Page-Counter
 '''
 
-largeformatsize = 95
-''' 
-# Define large format
-    Dimensions expressed in Points (72 points = 1 inch)
-    http://en.wikipedia.org/wiki/Point_(typography)
-    http://en.wikipedia.org/wiki/Paper_size
-
-#   8.5 x 11 is about 93.46
-#   Use ~95 to define just over "Letter" size 
-'''
-
 import warnings
 warnings.simplefilter("ignore", DeprecationWarning)
 
@@ -86,7 +75,7 @@ def _sorted_listdir(path):
 
     return contents
     
-def ProcessPDF ( filename ):
+def ProcessPDF ( filename, largeformatsize ):
     """
     Open a PDF to perform a page count and check for corrupt files
     Count small pages and large pages as defined above.
@@ -130,7 +119,7 @@ def ProcessPDF ( filename ):
                     
     return pdf_count
    
-def ParseDir (thisdir):
+def ParseDir (thisdir, largeformatsize):
     """
     Traverse a directory and its contents (sub-directories and files)
     Calls ProcessPDF for a page count for each PDF File
@@ -165,7 +154,7 @@ def ParseDir (thisdir):
                 #Uncomment to print object to screen (debugging aid, mostly). 
                 #print "Processing: ", iobject 
                 try: 
-                    pdf_count = ProcessPDF ( objpath )
+                    pdf_count = ProcessPDF ( objpath, largeformatsize )
                     for key, value in pdf_count.items(): 
                         dir_count[key] += value
                 except:
