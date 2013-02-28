@@ -49,16 +49,27 @@ class PageCounterConsole(cmd.Cmd):
   
   def do_setsize(self, args):
     """Change the default size formats for counting.
+    Currently, you can only set the size that differentiates "large" format
+    pages from other pages. 
+    Syntax: 
+      setsize <MIN_SIZE_FOR_LARGE_PAGES>
+    Example: 
+      setsize 95
 
-    Dimensions are expressed in Points (72 points = 1 inch)
+    MIN_SIZE_FOR_LARGE_PAGES should be number greater than zero, representing 
+    size of a page in square inches. All pages larger than this will be counted
+    as large pages. 
+    
     See: 
-       http://en.wikipedia.org/wiki/Point_(typography)
-       http://en.wikipedia.org/wiki/Paper_size
+      http://en.wikipedia.org/wiki/Paper_size
 
-    For reference, 8.5 x 11 is about 93.46 points. So use ~95 to 
-    define large format as pages just over "Letter" size.
+    Dimensions are in square inches. For reference, 8.5 x 11 is about 93.46 
+    square inches. So the default value of 95 defines large format as pages 
+    just over "Letter" size.
+
     """
-    print args
+    self.largeformatsize = args
+    print 'Set MIN_SIZE_FOR_LARGE_PAGES = {}'.format(self.largeformatsize)
     
   ##
   ## Utility Commands
