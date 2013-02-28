@@ -99,7 +99,13 @@ def ProcessPDF ( filename, largeformatsize ):
     for ii in range(npages): 
         pdf_count["npages"] += 1
 
-        # Calculate page dimensions and pricing category
+        '''
+        Calculate page dimensions and pricing category
+        Dimensions are returned by pyPDF in Points (72 points = 1 inch)
+        See: 
+           http://en.wikipedia.org/wiki/Point_(typography)
+           http://en.wikipedia.org/wiki/Paper_size
+        '''
         width = (pdfFile.getPage(ii).artBox.getUpperRight_x()/72 - 
              pdfFile.getPage(ii).artBox.getLowerLeft_x()/72)
     
