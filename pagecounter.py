@@ -34,7 +34,7 @@ class PageCounterConsole(cmd.Cmd):
   def do_dircount(self, args):
     """Process a directory and all the files inside
     Syntax: 
-      dircount <x:\path\to\dir\>
+      dircount <x:\path\\to\dir\>
     """
     if not os.path.exists(args):
       print 'Could not find specific path at <{}>'.format(args)
