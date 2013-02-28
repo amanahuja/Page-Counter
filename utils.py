@@ -91,7 +91,6 @@ def ProcessPDF ( filename ):
     Open a PDF to perform a page count and check for corrupt files
     Count small pages and large pages as defined above.
     """
-
     pdf_count = { 
                 "npages":0,
                 "nlargepages":0,
@@ -100,7 +99,11 @@ def ProcessPDF ( filename ):
                }
 
     filestream = file(filename, "rb")
-    pdfFile = PdfFileReader(filestream)
+    try: 
+      pdfFile = PdfFileReader(filestream)
+    except IOError: 
+      print 'Could not open file. Check permissions?\n <{}>'.format(filename)
+    
     npages = pdfFile.getNumPages()
     
                                
