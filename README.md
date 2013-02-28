@@ -2,10 +2,10 @@
 PDF Page Counter is a simple utility to crawl a file system to collect information about PDF files. 
 
 Features include: 
- * Navigates a directory in the file system
- * Locates and counts PDF files
+ * Command line interactive interface
+ * Identifies and counts a PDF file or multiple PDF files in a directory. 
  * Counts pages within PDF files
-  * Differentiate between different page sizes, for example, 8.5x11 inches vs 11x14 inches
+ * Differentiates between page sizes, for example, 8.5x11 inches vs 11x14 inches
 
 
 ## PDF Specification
