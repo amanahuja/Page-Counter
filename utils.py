@@ -107,7 +107,6 @@ def ProcessPDF ( filename ):
     
     npages = pdfFile.getNumPages()
     
-                               
     for ii in range(npages): 
         pdf_count["npages"] += 1
 
@@ -122,15 +121,13 @@ def ProcessPDF ( filename ):
             pdf_count["nlargepages"] += 1
         else:
             pdf_count["nsmallpages"] += 1
-    
-        
+            
         longside = width if width > height else height
         if longside > 34: 
             pdf_count["nsizeD"] += int(ceil(longside / 22))
         else: 
             pdf_count["nsizeD"] += 1
-        
-            
+                    
     return pdf_count
    
 def ParseDir (thisdir):
