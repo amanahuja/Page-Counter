@@ -98,11 +98,12 @@ def ProcessPDF ( filename ):
                 "nsizeD":0,
                }
 
-    filestream = file(filename, "rb")
     try: 
+      filestream = file(filename, "rb")    
       pdfFile = PdfFileReader(filestream)
     except IOError: 
-      print 'Could not open file. Check permissions?\n <{}>'.format(filename)
+      print 'Could not open file. Check permissions? <{}>'.format(filename)
+      return False
     
     npages = pdfFile.getNumPages()
     
