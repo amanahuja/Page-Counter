@@ -147,7 +147,7 @@ def ParseDir (thisdir):
                 "nsmallpages":0,
                 "nsizeD":0,
                }    
-    print     #Spacing for readability
+    print "Processing files",
     
     global badpdfs
 

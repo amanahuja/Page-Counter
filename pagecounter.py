@@ -39,8 +39,9 @@ class PageCounterConsole(cmd.Cmd):
     if not os.path.exists(args):
       print 'Could not find specific path at <{}>'.format(args)
       return
-    else: 
-      pass
+    
+    count = utils.ParseDir(args)
+    print count
   ##
   ## Utility Commands
   ## 
