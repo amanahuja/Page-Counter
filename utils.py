@@ -76,7 +76,7 @@ def main():
     print '\n--- END ---'
     
                  
-def sorted_listdir(path):
+def _sorted_listdir(path):
     """
     Returns the contents of a directory, sorting in order to 
     show directories and then files, ordered alphabetically
@@ -152,7 +152,7 @@ def ParseDir (thisdir):
     global badpdfs
 
     #Loop through each object in the directory
-    for iobject in sorted_listdir(thisdir):
+    for iobject in _sorted_listdir(thisdir):
         objpath = os.path.join(thisdir, iobject)
 
         #The directory object is a file            
