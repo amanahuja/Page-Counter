@@ -1,0 +1,15 @@
+# File types #
+##############
+*.bkup*
+*.pyc
+*.swp
+
+# Directories #
+###############
+build
+dist
+
+# Specific files #
+##################
+.project
+.pydevproject
