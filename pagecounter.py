@@ -68,7 +68,14 @@ class PageCounterConsole(cmd.Cmd):
     just over "Letter" size.
 
     """
-    self.largeformatsize = float(args)
+    try:     
+      self.largeformatsize = float(args)
+    except ValueError:
+      print 'Invalid value for size.'
+      print 'Try again. Enter a single number in square inches. Example:' 
+      print '\tsetsize 95'
+      return
+
     print 'Set MIN_SIZE_FOR_LARGE_PAGES = {}'.format(self.largeformatsize)
     
   ##
