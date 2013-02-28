@@ -1,3 +1,4 @@
+import utils
 import cmd
 
 class PageCounterConsole(cmd.Cmd):
@@ -25,7 +26,8 @@ class PageCounterConsole(cmd.Cmd):
       filecount <filename>
     """
     print args, type(args)
-    
+    count = utils.ProcessPDF(args)
+    print count
     
   ##
   ## Utility Commands
