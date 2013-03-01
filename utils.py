@@ -92,8 +92,8 @@ def ProcessPDF ( filename, largeformatsize ):
       filestream = file(filename, "rb")    
       pdfFile = PdfFileReader(filestream)
     except IOError: 
-      print 'Could not open file. Check permissions? <{}>'.format(filename)
-      return False
+      err = '<{}> :: Could not open file. Check permissions?'.format(filename)
+      return False, err
     
     npages = pdfFile.getNumPages()
     
@@ -124,7 +124,7 @@ def ProcessPDF ( filename, largeformatsize ):
         else: 
             pdf_count["nsizeDpages"] += 1
                     
-    return pdf_count
+    return True, pdf_count
    
 def ParseDir (thisdir, largeformatsize):
     """
