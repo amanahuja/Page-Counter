@@ -33,7 +33,14 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find a file at <{}>'.format(args)
       return
     count = utils.ProcessPDF(args, self.largeformatsize)
-    print count
+
+    if count:     
+      print '\nDirectory Stats for ', args, ":"
+      for k,v in count.iteritems(): 
+        print '{}: \t{}'.format(k,v)
+    else: 
+      #function didn't return anything, handle here
+      pass
   
   def do_dircount(self, args):
     """Process a directory and all the files inside
