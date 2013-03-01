@@ -41,7 +41,8 @@ def main():
     """
     Initiates the program by beginning the parse with rootdir
     """
-    dir_count = ParseDir(rootdir)
+    largeformatsize = 95
+    dir_count = ParseDir(rootdir, largeformatsize)
     
     for key, value in dir_count.items(): 
         total_count[key] += value
@@ -171,7 +172,7 @@ def ParseDir (thisdir, largeformatsize):
        
         elif os.path.isdir(objpath):
             dir_count["ndirs"] += 1
-            subdir_count = ParseDir(objpath)
+            subdir_count = ParseDir(objpath , largeformatsize)
             
             for key, value in subdir_count.items(): 
                 dir_count[key] += value
