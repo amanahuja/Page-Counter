@@ -18,7 +18,7 @@ total_count = {
                 "npages":0,
                 "nlargepages":0,
                 "nsmallpages":0,
-                "nsizeD":0,
+                "nsizeDpages":0,
                }
 
 #Keep track of the PDFs that PyPDF could not open
@@ -55,7 +55,7 @@ def main():
     print 'Total number of pages in PDFs are:', total_count["npages"]
     print '\tSmall pages:', total_count["nsmallpages"]
     print '\tLarge pages:', total_count["nlargepages"]
-    print '\tSize D page-equivalent:', total_count["nsizeD"]
+    print '\tSize D page-equivalent:', total_count["nsizeDpages"]
     
     #Print out any PDFs that could not be opened by pyPDF
     if len(badpdfs) > 0: 
@@ -85,7 +85,7 @@ def ProcessPDF ( filename, largeformatsize ):
                 "npages":0,
                 "nlargepages":0,
                 "nsmallpages":0,
-                "nsizeD":0,
+                "nsizeDpages":0,
                }
 
     try: 
@@ -120,9 +120,9 @@ def ProcessPDF ( filename, largeformatsize ):
             
         longside = width if width > height else height
         if longside > 34: 
-            pdf_count["nsizeD"] += int(ceil(longside / 22))
+            pdf_count["nsizeDpages"] += int(ceil(longside / 22))
         else: 
-            pdf_count["nsizeD"] += 1
+            pdf_count["nsizeDpages"] += 1
                     
     return pdf_count
    
@@ -141,7 +141,7 @@ def ParseDir (thisdir, largeformatsize):
                 "npages":0,
                 "nlargepages":0,
                 "nsmallpages":0,
-                "nsizeD":0,
+                "nsizeDpages":0,
                }    
     print "Processing files",
     

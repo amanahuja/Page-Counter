@@ -35,7 +35,7 @@ class PageCounterConsole(cmd.Cmd):
     count = utils.ProcessPDF(args, self.largeformatsize)
 
     if count:     
-      print '\nDirectory Stats for ', args, ":"
+      print '\nFile Stats for <{}>'.format(args)
       for k,v in count.iteritems(): 
         print '{}: \t{}'.format(k,v)
     else: 
@@ -53,7 +53,7 @@ class PageCounterConsole(cmd.Cmd):
     
     count = utils.ParseDir(args, self.largeformatsize)
     if count:               
-      print '\nDirectory Stats for ', args, ":"
+      print '\nDirectory Stats for <{}>:'.format(args)
       print '(Includes sub-directories)'
       print '\tNumber of files:', count["nfiles"]
       print '\tNumber of PDFs:', count["npdfs"]
