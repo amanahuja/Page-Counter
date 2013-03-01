@@ -45,7 +45,16 @@ class PageCounterConsole(cmd.Cmd):
       return
     
     count = utils.ParseDir(args, self.largeformatsize)
-    if not count: 
+    if count:               
+      print '\nDirectory Stats for ', args, ":"
+      print '(Includes sub-directories)'
+      print '\tNumber of files:', count["nfiles"]
+      print '\tNumber of PDFs:', count["npdfs"]
+      print '\tNumber of pages:', count["npages"]
+      print '\t\tLarge pages:', count["nlargepages"]
+      print '\t\tSmall pages:', count["nsmallpages"]
+      print '\t\tSmall pages:', count["nsizeD"]
+    else: 
       #function encountered error, handle here
       pass
   

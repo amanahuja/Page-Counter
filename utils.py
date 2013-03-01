@@ -180,14 +180,4 @@ def ParseDir (thisdir, largeformatsize):
             #Wait, what? Not a file NOR a directory?
             print "Invalid Type: ", objpath
         
-        
-    print '\nDirectory Stats for ', thisdir, ":"
-    print '(Includes sub-directories)'
-    print '\tNumber of files:', dir_count["nfiles"]
-    print '\tNumber of PDFs:', dir_count["npdfs"]
-    print '\tNumber of pages:', dir_count["npages"]
-    print '\t\tLarge pages:', dir_count["nlargepages"]
-    print '\t\tSmall pages:', dir_count["nsmallpages"]
-    print '\t\tSmall pages:', dir_count["nsizeD"]
-
     return dir_count
