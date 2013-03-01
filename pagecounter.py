@@ -45,7 +45,9 @@ class PageCounterConsole(cmd.Cmd):
       return
     
     count = utils.ParseDir(args, self.largeformatsize)
-    if not count: pass
+    if not count: 
+      #function encountered error, handle here
+      pass
   
   def do_setsize(self, args):
     """Change the default size formats for counting.
