@@ -89,13 +89,21 @@ def ProcessPDF ( filename, largeformatsize ):
                }
 
     try: 
+      #Open file
       filestream = file(filename, "rb")    
+      #load into pypdf
       pdfFile = PdfFileReader(filestream)
+      
+      #First access into pdf contents
+      #  Raises decryption/security exceptions here
+      npages = pdfFile.getNumPages()
+
     except IOError: 
       err = '<{}> :: Could not open file. Check permissions?'.format(filename)
       return False, err
-    
-    npages = pdfFile.getNumPages()
+    except: 
+      err = '<{}> :: {}'.format(filename, 'temp error')
+      return False, err
     
     for ii in range(npages): 
         pdf_count["npages"] += 1
@@ -158,14 +166,17 @@ def ParseDir (thisdir, largeformatsize):
             if iobject.endswith('.pdf'):
                 dir_count["npdfs"] += 1
 
-                #Uncomment to print object to screen (debugging aid, mostly). 
-                #print "Processing: ", iobject 
-                try: 
-                    pdf_count = ProcessPDF ( objpath, largeformatsize )
-                    for key, value in pdf_count.items(): 
-                        dir_count[key] += value
-                except:
-                    badpdfs.append(str(objpath))
+                #DEBUG output: print "Processing: ", iobject 
+                s, content = ProcessPDF( objpath, largeformatsize )
+
+                if s: 
+                  pdf_counts = content
+                  for key, value in pdf_counts.items(): 
+                      dir_count[key] += value
+                else: 
+                  #function returned error, handle here
+                  error = content
+                  badpdfs.append(error)
 
                 print ".",  #Useful to indicate progress 
             pass

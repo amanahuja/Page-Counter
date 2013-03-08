@@ -62,7 +62,7 @@ class PageCounterConsole(cmd.Cmd):
       print '\tNumber of pages:', count["npages"]
       print '\t\tLarge pages:', count["nlargepages"]
       print '\t\tSmall pages:', count["nsmallpages"]
-      print '\t\tSmall pages:', count["nsizeD"]
+      print '\t\tSmall pages:', count["nsizeDpages"]
     else: 
       #function encountered error, handle here
       pass
