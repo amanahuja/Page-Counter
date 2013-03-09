@@ -95,7 +95,10 @@ def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
   return logfilename
 
 def clean_input ( instring ):
-  outstring = instring
+  outstring = instring.strip()
+
+  outstring = outstring.strip('"')
+  outstring = outstring.strip("'")
   return outstring  
   
   
