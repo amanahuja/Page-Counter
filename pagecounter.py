@@ -34,6 +34,10 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find a file at <{}>'.format(filepath)
       return
     
+    if not filepath.endswith('.pdf'):
+      print 'Invalid extension'
+      return      
+
     s, count = utils.ProcessPDF(filepath, self.largeformatsize)
 
     lout = self._log_line
