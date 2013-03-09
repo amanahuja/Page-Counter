@@ -52,7 +52,6 @@ def ProcessPDF ( filename, largeformatsize ):
                 "npages":0,
                 "nlargepages":0,
                 "nsmallpages":0,
-                "nsizeDpages":0,
                }
 
     try: 
@@ -92,12 +91,6 @@ def ProcessPDF ( filename, largeformatsize ):
             pdf_count["nlargepages"] += 1
         else:
             pdf_count["nsmallpages"] += 1
-            
-        longside = width if width > height else height
-        if longside > 34: 
-            pdf_count["nsizeDpages"] += int(ceil(longside / 22))
-        else: 
-            pdf_count["nsizeDpages"] += 1
                     
     return True, pdf_count
    
@@ -116,7 +109,6 @@ def ParseDir (thisdir, largeformatsize):
                 "npages":0,
                 "nlargepages":0,
                 "nsmallpages":0,
-                "nsizeDpages":0,
                }    
     print "Processing files",
     

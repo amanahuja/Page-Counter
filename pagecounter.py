@@ -123,7 +123,6 @@ class PageCounterConsole(cmd.Cmd):
     lout('\tNumber of pages: {}\n'.format(counts["npages"]))
     lout('\t\tLarge pages: {}\n'.format(counts["nlargepages"]))
     lout('\t\tSmall pages: {}\n'.format(counts["nsmallpages"]))
-    lout('\t\tSmall pages: {}\n'.format(counts["nsizeDpages"]))
     
     if errors: 
       #function encountered error, handle here
