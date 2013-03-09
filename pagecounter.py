@@ -129,21 +129,24 @@ class PageCounterConsole(cmd.Cmd):
     cmd.Cmd.preloop(self)
     self._hist = []  
     self.logfilename = utils._get_logfile_name()
-    print self.logfilename
+    self.outfile = file(self.logfilename, 'w')
+    print 'Logging to file <{}>.'.format(self.logfilename)
   
   def precmd(self, line):
     self._hist += [ line.strip() ]
     return line
 
-  def postcmd(self):
+  def postcmd(self, stop, line):
     """After each command is completed.
     """
-    print 'Done.\n' + '-' * 10
+    print '-' * 10
+    cmd.Cmd.postcmd(self,stop,line)
     
   def postloop(self):
     """On Exit
     """
     cmd.Cmd.postloop(self)
+    self.outfile.close()
     print '\nBye.\n'
     
 
