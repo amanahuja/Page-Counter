@@ -140,7 +140,7 @@ class PageCounterConsole(cmd.Cmd):
     """After each command is completed.
     """
     print '-' * 10
-    cmd.Cmd.postcmd(self,stop,line)
+    return stop
     
   def postloop(self):
     """On Exit
@@ -149,7 +149,6 @@ class PageCounterConsole(cmd.Cmd):
     self.outfile.close()
     print 'Log saved to file <{}>.'.format(self.logfilename)
     print 'Bye.\n'
-    
 
 if __name__ == "__main__":
   console = PageCounterConsole()
