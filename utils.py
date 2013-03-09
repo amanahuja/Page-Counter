@@ -11,17 +11,6 @@ from pyPdf import PdfFileReader
 from math import ceil
 from datetime import datetime
 
-#Various global counts needed
-total_count = { 
-                "ndirs":1,  #to include the root directory in the count
-                "nfiles":0,
-                "npdfs":0, 
-                "npages":0,
-                "nlargepages":0,
-                "nsmallpages":0,
-                "nsizeDpages":0,
-               }
-                
 def _sorted_listdir(path):
     """
     Returns the contents of a directory, sorting in order to 
