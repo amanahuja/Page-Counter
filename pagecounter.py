@@ -1,24 +1,11 @@
 import utils
 import cmd, os
-from datetime import datetime
 
 class PageCounterConsole(cmd.Cmd):
 
   #Define default largeformatsize
   # See module do_setsize for more information
   largeformatsize = 95
-
-  '''
-  Figure out what to name the log file
-  '''  
-  logfilebase = 'count'
-  timestamp = datetime.now().strftime('%d-%m-%Y')
-  logfilename = '{}.{}.log'.format(logfilebase, timestamp)
-  if os.path.exists(logfilename):
-    ii = 0
-    while os.path.exist(logfilename):
-      ii += 1
-      logfilename = '{}.{}_{%2i}.log'.format(logfilebase, timestamp, str(ii))
     
   #Override Cmd init
   def __init__(self):

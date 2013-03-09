@@ -9,6 +9,7 @@ warnings.simplefilter("ignore", DeprecationWarning)
 import os, sys
 from pyPdf import PdfFileReader
 from math import ceil
+from datetime import datetime
 
 #Various global counts needed
 total_count = { 
@@ -78,7 +79,19 @@ def _sorted_listdir(path):
     contents.extend(sorted([d for d in os.listdir(path) if os.path.isdir(path + os.path.sep + d)]))
 
     return contents
-    
+
+def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
+  '''
+  Figure out what to name the log file
+  '''  
+  timestamp = datetime.now().strftime('%d-%m-%Y')
+  logfilename = '{}.{}.log'.format(logfilebase, timestamp)
+  if os.path.exists(logfilename):
+    ii = 0
+    while os.path.exist(logfilename):
+      ii += 1
+      logfilename = '{}.{}_{%2i}.log'.format(logfilebase, timestamp, str(ii))
+
 def ProcessPDF ( filename, largeformatsize ):
     """
     Open a PDF to perform a page count and check for corrupt files
