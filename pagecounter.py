@@ -147,7 +147,8 @@ class PageCounterConsole(cmd.Cmd):
     """
     cmd.Cmd.postloop(self)
     self.outfile.close()
-    print '\nBye.\n'
+    print 'Log saved to file <{}>.'.format(self.logfilename)
+    print 'Bye.\n'
     
 
 if __name__ == "__main__":
