@@ -91,7 +91,7 @@ class PageCounterConsole(cmd.Cmd):
   ## Utility Commands
   ## 
   
-  def _print_output(loc, counts, errors):
+  def _print_output(self, loc, counts, errors):
     print '\nDirectory Stats for <{}>:'.format(loc)
     print '(Includes sub-directories)'
     print '\tNumber of files:', counts["nfiles"]
@@ -106,7 +106,26 @@ class PageCounterConsole(cmd.Cmd):
       print 'Encountered errors in the following files: '
       for err in errors: 
         print '\t%s' % err
-        
+
+    self._log_output(self, loc, counts, errors)
+      
+  def _log_output(self, loc, counts, errors):
+    fout = self.outfile.write
+    fout('\nDirectory Stats for <{}>:'.format(loc))
+    fout('(Includes sub-directories)')
+    fout('\tNumber of files:', counts["nfiles"])
+    fout( '\tNumber of PDFs:', counts["npdfs"])
+    fout('\tNumber of pages:', counts["npages"])
+    fout('\t\tLarge pages:', counts["nlargepages"])
+    fout('\t\tSmall pages:', counts["nsmallpages"])
+    fout('\t\tSmall pages:', counts["nsizeDpages"])
+    
+    if errors: 
+      #function encountered error, handle here
+      fout('Encountered errors in the following files: ')
+      for err in errors: 
+        fout('\t%s' % err)
+ 
   def do_hist(self, args):
     """Print recently used commands"""
     print 'Recently used commands: '
