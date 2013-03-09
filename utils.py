@@ -85,12 +85,14 @@ def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
   Figure out what to name the log file
   """  
   suffix = '.log'
-  name = '{}.{%d-%m-%Y}'.format(logfilebase, datetime.now())
+  name = '{}.{:%d-%m-%Y}'.format(logfilebase, datetime.now())
   ii = 0
-  logfilename = name + '{%2i}'.format(str(ii)) + suffix
+  logfilename = name + '.{:02d}'.format(ii) + suffix
   while os.path.exists(logfilename):
     ii += 1
-    logfilename = name + '{%2i}'.format(str(ii)) + suffix
+    logfilename = name + '.{:02d}'.format(ii) + suffix
+  
+  return logfilename
 
 def ProcessPDF ( filename, largeformatsize ):
     """

@@ -128,6 +128,8 @@ class PageCounterConsole(cmd.Cmd):
     """
     cmd.Cmd.preloop(self)
     self._hist = []  
+    self.logfilename = utils._get_logfile_name()
+    print self.logfilename
   
   def precmd(self, line):
     self._hist += [ line.strip() ]
