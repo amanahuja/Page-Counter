@@ -24,6 +24,9 @@ total_count = {
 #Keep track of the PDFs that PyPDF could not open
 badpdfs = []
 
+'''
+TO REMOVE
+---
 def main():
     #prompt user for rootdir 
     print "Enter the complete path of the directory to parse."
@@ -64,7 +67,7 @@ def main():
         for badpdf in badpdfs: 
             print '\t', badpdf
     print '\n--- END ---'
-    
+'''   
                  
 def _sorted_listdir(path):
     """
@@ -192,6 +195,6 @@ def ParseDir (thisdir, largeformatsize):
 
         else: 
             #Wait, what? Not a file NOR a directory?
-            print "Invalid Type: ", objpath
+            badpdfs += "<{}>: Invalid Type!".format(objpath)
         
     return badpdfs, dir_count

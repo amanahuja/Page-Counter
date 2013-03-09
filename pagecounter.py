@@ -1,12 +1,25 @@
 import utils
 import cmd, os
+from datetime import datetime
 
 class PageCounterConsole(cmd.Cmd):
 
   #Define default largeformatsize
   # See module do_setsize for more information
   largeformatsize = 95
-  
+
+  '''
+  Figure out what to name the log file
+  '''  
+  logfilebase = 'count'
+  timestamp = datetime.now().strftime('%d-%m-%Y')
+  logfilename = '{}.{}.log'.format(logfilebase, timestamp)
+  if os.path.exists(logfilename):
+    ii = 0
+    while os.path.exist(logfilename):
+      ii += 1
+      logfilename = '{}.{}_{%2i}.log'.format(logfilebase, timestamp, str(ii))
+    
   #Override Cmd init
   def __init__(self):
     cmd.Cmd.__init__(self)
@@ -14,12 +27,11 @@ class PageCounterConsole(cmd.Cmd):
     self.intro = """
       PDF Page Counter
       Author: @amanqa
-      https://github.com/amanahuja/Page-Counter
       ----------------------
       Type 'help' for a list of commands.
       Type 'help <command>' for help on any command
+      
       """
-  
   ##
   ## Page-counter commands
   ## 
@@ -69,8 +81,6 @@ class PageCounterConsole(cmd.Cmd):
       print 'Encountered errors in the following files: '
       for err in errors: 
         print '\t%s' % err
-    print 'Done.\n' + '-' * 10
-    
       
   def do_setsize(self, args):
     """Change the default size formats for counting.
@@ -136,6 +146,11 @@ class PageCounterConsole(cmd.Cmd):
     self._hist += [ line.strip() ]
     return line
 
+  def postcmd(self):
+    """After each command is completed.
+    """
+    print 'Done.\n' + '-' * 10
+    
   def postloop(self):
     """On Exit
     """
