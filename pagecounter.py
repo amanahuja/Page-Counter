@@ -34,6 +34,10 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find a file at <{}>'.format(filepath)
       return
     
+    if not filepath.endswith('.pdf'):
+      print 'Invalid extension'
+      return      
+
     s, count = utils.ProcessPDF(filepath, self.largeformatsize)
 
     lout = self._log_line
@@ -60,6 +64,10 @@ class PageCounterConsole(cmd.Cmd):
     errors, counts = utils.ParseDir(dirpath, self.largeformatsize)
 
     self._log_output (dirpath, counts, errors)
+    
+    if counts["nfiles"] != counts["npdfs"]:
+      self._log_line('Warning: Ignored {} files that were not PDFs.\n'.format(
+          counts["nfiles"] - counts["npdfs"]))
       
   def do_setsize(self, args):
     """Change the default size formats for counting.
