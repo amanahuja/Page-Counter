@@ -107,18 +107,18 @@ class PageCounterConsole(cmd.Cmd):
       for err in errors: 
         print '\t%s' % err
 
-    self._log_output(self, loc, counts, errors)
+    self._log_output(loc, counts, errors)
       
   def _log_output(self, loc, counts, errors):
     fout = self.outfile.write
-    fout('\nDirectory Stats for <{}>:'.format(loc))
-    fout('(Includes sub-directories)')
-    fout('\tNumber of files:', counts["nfiles"])
-    fout( '\tNumber of PDFs:', counts["npdfs"])
-    fout('\tNumber of pages:', counts["npages"])
-    fout('\t\tLarge pages:', counts["nlargepages"])
-    fout('\t\tSmall pages:', counts["nsmallpages"])
-    fout('\t\tSmall pages:', counts["nsizeDpages"])
+    fout('\nDirectory Stats for <{}>:\n'.format(loc))
+    fout('(Includes sub-directories)\n')
+    fout('\tNumber of files: {}\n'.format(counts["nfiles"]))
+    fout('\tNumber of PDFs: {}\n'.format(counts["npdfs"]))
+    fout('\tNumber of pages: {}\n'.format(counts["npages"]))
+    fout('\t\tLarge pages: {}\n'.format(counts["nlargepages"]))
+    fout('\t\tSmall pages: {}\n'.format(counts["nsmallpages"]))
+    fout('\t\tSmall pages: {}\n'.format(counts["nsizeDpages"]))
     
     if errors: 
       #function encountered error, handle here
@@ -151,7 +151,7 @@ class PageCounterConsole(cmd.Cmd):
     cmd.Cmd.preloop(self)
     self._hist = []  
     self.logfilename = utils._get_logfile_name()
-    self.outfile = file(self.logfilename, 'w')
+    self.outfile = file(self.logfilename, 'wb')
     print 'Logging to file <{}>.'.format(self.logfilename)
   
   def precmd(self, line):
