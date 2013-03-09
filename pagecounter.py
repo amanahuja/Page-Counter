@@ -66,7 +66,11 @@ class PageCounterConsole(cmd.Cmd):
     
     if errors: 
       #function encountered error, handle here
-      print errors
+      print 'Encountered errors in the following files: '
+      for err in errors: 
+        print '\t%s' % err
+    print 'Done.\n' + '-' * 10
+    
       
   def do_setsize(self, args):
     """Change the default size formats for counting.
