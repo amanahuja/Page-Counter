@@ -54,7 +54,7 @@ class PageCounterConsole(cmd.Cmd):
     
     errors, counts = utils.ParseDir(args, self.largeformatsize)
 
-    self._print_output (args, counts, errors)
+    self._log_output (args, counts, errors)
       
   def do_setsize(self, args):
     """Change the default size formats for counting.
@@ -110,22 +110,27 @@ class PageCounterConsole(cmd.Cmd):
     self._log_output(loc, counts, errors)
       
   def _log_output(self, loc, counts, errors):
-    fout = self.outfile.write
-    fout('\nDirectory Stats for <{}>:\n'.format(loc))
-    fout('(Includes sub-directories)\n')
-    fout('\tNumber of files: {}\n'.format(counts["nfiles"]))
-    fout('\tNumber of PDFs: {}\n'.format(counts["npdfs"]))
-    fout('\tNumber of pages: {}\n'.format(counts["npages"]))
-    fout('\t\tLarge pages: {}\n'.format(counts["nlargepages"]))
-    fout('\t\tSmall pages: {}\n'.format(counts["nsmallpages"]))
-    fout('\t\tSmall pages: {}\n'.format(counts["nsizeDpages"]))
+    lout = self._log_line
+    lout('\nDirectory Stats for <{}>:\n'.format(loc))
+    lout('(Includes sub-directories)\n')
+    lout('\tNumber of files: {}\n'.format(counts["nfiles"]))
+    lout('\tNumber of PDFs: {}\n'.format(counts["npdfs"]))
+    lout('\tNumber of pages: {}\n'.format(counts["npages"]))
+    lout('\t\tLarge pages: {}\n'.format(counts["nlargepages"]))
+    lout('\t\tSmall pages: {}\n'.format(counts["nsmallpages"]))
+    lout('\t\tSmall pages: {}\n'.format(counts["nsizeDpages"]))
     
     if errors: 
       #function encountered error, handle here
-      fout('Encountered errors in the following files:\n')
+      lout('Encountered errors in the following files:\n')
       for err in errors: 
-        fout('\t%s\n' % err)
+        lout('\t%s\n' % err)
  
+  def _log_line(self, line):
+    print line,
+    fout = self.outfile.write
+    fout (line)
+    
   def do_hist(self, args):
     """Print recently used commands"""
     print 'Recently used commands: '
