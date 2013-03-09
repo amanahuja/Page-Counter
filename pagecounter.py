@@ -34,14 +34,15 @@ class PageCounterConsole(cmd.Cmd):
     
     s, count = utils.ProcessPDF(args, self.largeformatsize)
 
+    lout = self._log_line
     if s:     
-      print '\nFile Stats for <{}>'.format(args)
+      lout('\nFile Stats for <{}>\n'.format(args))
       for k,v in count.iteritems(): 
-        print '{}: \t{}'.format(k,v)
+        lout('{}: \t{}\n'.format(k,v))
     else: 
       #function returned error, handle here
       error = count 
-      print error
+      lout(error + '\n')
     
   def do_dircount(self, args):
     """Process a directory and all the files inside
@@ -90,25 +91,7 @@ class PageCounterConsole(cmd.Cmd):
   ##
   ## Utility Commands
   ## 
-  
-  def _print_output(self, loc, counts, errors):
-    print '\nDirectory Stats for <{}>:'.format(loc)
-    print '(Includes sub-directories)'
-    print '\tNumber of files:', counts["nfiles"]
-    print '\tNumber of PDFs:', counts["npdfs"]
-    print '\tNumber of pages:', counts["npages"]
-    print '\t\tLarge pages:', counts["nlargepages"]
-    print '\t\tSmall pages:', counts["nsmallpages"]
-    print '\t\tSmall pages:', counts["nsizeDpages"]
-    
-    if errors: 
-      #function encountered error, handle here
-      print 'Encountered errors in the following files: '
-      for err in errors: 
-        print '\t%s' % err
-
-    self._log_output(loc, counts, errors)
-      
+        
   def _log_output(self, loc, counts, errors):
     lout = self._log_line
     lout('\nDirectory Stats for <{}>:\n'.format(loc))
