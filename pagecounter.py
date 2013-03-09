@@ -85,12 +85,7 @@ class PageCounterConsole(cmd.Cmd):
 
     #Print output
     self._log_output (dirpath, counts, errors)
-    
-    #Print warning if any files ignored
-    if counts["nfiles"] != counts["npdfs"]:
-      self._log_line('Warning: Ignored {} files that were not PDFs.\n'.format(
-          counts["nfiles"] - counts["npdfs"]))
-      
+          
   def do_setsize(self, args):
     """Change the default size formats for counting.
     Currently, you can only set the size that differentiates "large" format
@@ -141,6 +136,12 @@ class PageCounterConsole(cmd.Cmd):
       lout('Encountered errors in the following files:\n')
       for err in errors: 
         lout('\t%s\n' % err)
+    
+    #Print warning if any files were ignored
+    if counts["nfiles"] != counts["npdfs"]:
+      lout('Warning: Ignored {} files that were not PDFs.\n'.format(
+          counts["nfiles"] - counts["npdfs"]))
+
  
   def _log_line(self, line):
     print line,
