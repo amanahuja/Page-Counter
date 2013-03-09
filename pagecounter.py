@@ -28,15 +28,17 @@ class PageCounterConsole(cmd.Cmd):
     Syntax: 
       filecount <filename>
     """
-    if not os.path.exists(args):
-      print 'Could not find a file at <{}>'.format(args)
+    filepath = utils.clean_input(args)
+    
+    if not os.path.exists(filepath):
+      print 'Could not find a file at <{}>'.format(filepath)
       return
     
-    s, count = utils.ProcessPDF(args, self.largeformatsize)
+    s, count = utils.ProcessPDF(filepath, self.largeformatsize)
 
     lout = self._log_line
     if s:     
-      lout('\nFile Stats for <{}>\n'.format(args))
+      lout('\nFile Stats for <{}>\n'.format(filepath))
       for k,v in count.iteritems(): 
         lout('{}: \t{}\n'.format(k,v))
     else: 
