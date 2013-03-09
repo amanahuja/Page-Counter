@@ -94,6 +94,11 @@ def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
   
   return logfilename
 
+def clean_input ( instring ):
+  outstring = instring
+  return outstring  
+  
+  
 def ProcessPDF ( filename, largeformatsize ):
     """
     Open a PDF to perform a page count and check for corrupt files

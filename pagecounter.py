@@ -49,13 +49,15 @@ class PageCounterConsole(cmd.Cmd):
     Syntax: 
       dircount <x:\\path\\to\\dir\\>
     """
-    if not os.path.exists(args):
-      print 'Could not find specific path at <{}>'.format(args)
+    dirpath = utils.clean_input(args)
+    
+    if not os.path.exists(dirpath):
+      print 'Could not find specific path at <{}>'.format(dirpath)
       return
     
-    errors, counts = utils.ParseDir(args, self.largeformatsize)
+    errors, counts = utils.ParseDir(dirpath, self.largeformatsize)
 
-    self._log_output (args, counts, errors)
+    self._log_output (dirpath, counts, errors)
       
   def do_setsize(self, args):
     """Change the default size formats for counting.
