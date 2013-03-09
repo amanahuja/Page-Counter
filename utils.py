@@ -6,7 +6,7 @@ https://github.com/amanahuja/Page-Counter
 import warnings
 warnings.simplefilter("ignore", DeprecationWarning)
 
-import os, sys
+import os
 from pyPdf import PdfFileReader
 from math import ceil
 from datetime import datetime
