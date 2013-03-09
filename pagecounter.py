@@ -74,6 +74,12 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find specific path at <{}>'.format(dirpath)
       return
     
+    #Make sure this is a file, not a direcotyr
+    if os.path.isfile(dirpath):
+      print 'This path point to a file, not a directory.'
+      print 'Use the "filecount" command instead.'
+      return
+      
     #Get counts
     errors, counts = utils.ParseDir(dirpath, self.largeformatsize)
 
