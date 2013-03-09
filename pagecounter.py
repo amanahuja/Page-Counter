@@ -122,9 +122,9 @@ class PageCounterConsole(cmd.Cmd):
     
     if errors: 
       #function encountered error, handle here
-      fout('Encountered errors in the following files: ')
+      fout('Encountered errors in the following files:\n')
       for err in errors: 
-        fout('\t%s' % err)
+        fout('\t%s\n' % err)
  
   def do_hist(self, args):
     """Print recently used commands"""
