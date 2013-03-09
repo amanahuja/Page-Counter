@@ -35,6 +35,12 @@ class PageCounterConsole(cmd.Cmd):
     if not os.path.exists(filepath):
       print 'Could not find a file at <{}>'.format(filepath)
       return
+      
+    #Make sure this is a file, not a direcotyr
+    if os.path.isdir(filepath):
+      print 'This path point to a directory, not a file.',
+      print 'Use the "dircount" command instead.'
+      return
     
     #check file extension is PDF
     if not filepath.endswith('.pdf'):
