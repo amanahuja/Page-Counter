@@ -53,20 +53,21 @@ class PageCounterConsole(cmd.Cmd):
       print 'Could not find specific path at <{}>'.format(args)
       return
     
-    count = utils.ParseDir(args, self.largeformatsize)
-    if count:               
-      print '\nDirectory Stats for <{}>:'.format(args)
-      print '(Includes sub-directories)'
-      print '\tNumber of files:', count["nfiles"]
-      print '\tNumber of PDFs:', count["npdfs"]
-      print '\tNumber of pages:', count["npages"]
-      print '\t\tLarge pages:', count["nlargepages"]
-      print '\t\tSmall pages:', count["nsmallpages"]
-      print '\t\tSmall pages:', count["nsizeDpages"]
-    else: 
+    errors, counts = utils.ParseDir(args, self.largeformatsize)
+              
+    print '\nDirectory Stats for <{}>:'.format(args)
+    print '(Includes sub-directories)'
+    print '\tNumber of files:', counts["nfiles"]
+    print '\tNumber of PDFs:', counts["npdfs"]
+    print '\tNumber of pages:', counts["npages"]
+    print '\t\tLarge pages:', counts["nlargepages"]
+    print '\t\tSmall pages:', counts["nsmallpages"]
+    print '\t\tSmall pages:', counts["nsizeDpages"]
+    
+    if errors: 
       #function encountered error, handle here
-      pass
-  
+      print errors
+      
   def do_setsize(self, args):
     """Change the default size formats for counting.
     Currently, you can only set the size that differentiates "large" format

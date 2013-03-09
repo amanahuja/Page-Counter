@@ -101,8 +101,8 @@ def ProcessPDF ( filename, largeformatsize ):
     except IOError: 
       err = '<{}> :: Could not open file. Check permissions?'.format(filename)
       return False, err
-    except: 
-      err = '<{}> :: {}'.format(filename, 'temp error')
+    except Exception as e: 
+      err = '<{}> :: {}'.format(filename, e)
       return False, err
     
     for ii in range(npages): 
@@ -153,7 +153,7 @@ def ParseDir (thisdir, largeformatsize):
                }    
     print "Processing files",
     
-    global badpdfs
+    badpdfs = []
 
     #Loop through each object in the directory
     for iobject in _sorted_listdir(thisdir):
@@ -183,13 +183,15 @@ def ParseDir (thisdir, largeformatsize):
        
         elif os.path.isdir(objpath):
             dir_count["ndirs"] += 1
-            subdir_count = ParseDir(objpath , largeformatsize)
+            subdir_badpdfs, subdir_count = ParseDir(objpath , largeformatsize)
             
             for key, value in subdir_count.items(): 
                 dir_count[key] += value
+            
+            badpdfs = badpdfs + subdir_badpdfs
 
         else: 
             #Wait, what? Not a file NOR a directory?
             print "Invalid Type: ", objpath
         
-    return dir_count
+    return badpdfs, dir_count
