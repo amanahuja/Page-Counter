@@ -179,7 +179,7 @@ def ParseDir (thisdir, largeformatsize):
                }    
     print "Processing files",
     
-    badpdfs = []
+    errors = []
 
     #Loop through each object in the directory
     for iobject in _sorted_listdir(thisdir):
@@ -202,22 +202,22 @@ def ParseDir (thisdir, largeformatsize):
                 else: 
                   #function returned error, handle here
                   error = content
-                  badpdfs.append(error)
+                  errors.append(error)
 
                 print ".",  #Useful to indicate progress 
             pass
        
         elif os.path.isdir(objpath):
             dir_count["ndirs"] += 1
-            subdir_badpdfs, subdir_count = ParseDir(objpath , largeformatsize)
+            subdir_errors, subdir_count = ParseDir(objpath , largeformatsize)
             
             for key, value in subdir_count.items(): 
                 dir_count[key] += value
             
-            badpdfs = badpdfs + subdir_badpdfs
+            errors = errors + subdir_errors
 
         else: 
             #Wait, what? Not a file NOR a directory?
-            badpdfs += "<{}>: Invalid Type!".format(objpath)
+            errors += "<{}>: Invalid Type!".format(objpath)
         
-    return badpdfs, dir_count
+    return errors, dir_count
