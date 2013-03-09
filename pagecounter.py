@@ -28,18 +28,23 @@ class PageCounterConsole(cmd.Cmd):
     Syntax: 
       filecount <filename>
     """
+    #Clean input
     filepath = utils.clean_input(args)
     
+    #check if file exists
     if not os.path.exists(filepath):
       print 'Could not find a file at <{}>'.format(filepath)
       return
     
+    #check file extension is PDF
     if not filepath.endswith('.pdf'):
       print 'Invalid extension'
       return      
 
+    #Get counts
     s, count = utils.ProcessPDF(filepath, self.largeformatsize)
 
+    #Print out counts
     lout = self._log_line
     if s:     
       lout('\nFile Stats for <{}>\n'.format(filepath))
@@ -55,16 +60,21 @@ class PageCounterConsole(cmd.Cmd):
     Syntax: 
       dircount <x:\\path\\to\\dir\\>
     """
+    #Clean input
     dirpath = utils.clean_input(args)
     
+    #Check that directory exists
     if not os.path.exists(dirpath):
       print 'Could not find specific path at <{}>'.format(dirpath)
       return
     
+    #Get counts
     errors, counts = utils.ParseDir(dirpath, self.largeformatsize)
 
+    #Print output
     self._log_output (dirpath, counts, errors)
     
+    #Print warning if any files ignored
     if counts["nfiles"] != counts["npdfs"]:
       self._log_line('Warning: Ignored {} files that were not PDFs.\n'.format(
           counts["nfiles"] - counts["npdfs"]))
