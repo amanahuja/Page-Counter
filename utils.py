@@ -94,6 +94,22 @@ def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
   
   return logfilename
 
+def print_output(loc, counts, errors):
+    print '\nDirectory Stats for <{}>:'.format(loc)
+    print '(Includes sub-directories)'
+    print '\tNumber of files:', counts["nfiles"]
+    print '\tNumber of PDFs:', counts["npdfs"]
+    print '\tNumber of pages:', counts["npages"]
+    print '\t\tLarge pages:', counts["nlargepages"]
+    print '\t\tSmall pages:', counts["nsmallpages"]
+    print '\t\tSmall pages:', counts["nsizeDpages"]
+    
+    if errors: 
+      #function encountered error, handle here
+      print 'Encountered errors in the following files: '
+      for err in errors: 
+        print '\t%s' % err
+
 def ProcessPDF ( filename, largeformatsize ):
     """
     Open a PDF to perform a page count and check for corrupt files
