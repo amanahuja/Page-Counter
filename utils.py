@@ -81,16 +81,16 @@ def _sorted_listdir(path):
     return contents
 
 def _get_logfile_name(logfilebase = 'count', usetimestamp = True):
-  '''
+  """
   Figure out what to name the log file
-  '''  
-  timestamp = datetime.now().strftime('%d-%m-%Y')
-  logfilename = '{}.{}.log'.format(logfilebase, timestamp)
-  if os.path.exists(logfilename):
-    ii = 0
-    while os.path.exist(logfilename):
-      ii += 1
-      logfilename = '{}.{}_{%2i}.log'.format(logfilebase, timestamp, str(ii))
+  """  
+  suffix = '.log'
+  name = '{}.{%d-%m-%Y}'.format(logfilebase, datetime.now())
+  ii = 0
+  logfilename = name + '{%2i}'.format(str(ii)) + suffix
+  while os.path.exists(logfilename):
+    ii += 1
+    logfilename = name + '{%2i}'.format(str(ii)) + suffix
 
 def ProcessPDF ( filename, largeformatsize ):
     """
